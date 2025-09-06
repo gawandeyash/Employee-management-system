@@ -1,6 +1,11 @@
 package com.reliaquest.api.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+import com.reliaquest.api.constants.ApiConstants;
+import com.reliaquest.api.dtos.Employee;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,23 +26,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IEmployeeController<Entity, Input> {
 
     @GetMapping()
-    ResponseEntity<List<Entity>> getAllEmployees();
+    ResponseEntity<List<Employee>> getAllEmployees() throws IOException;
 
-    @GetMapping("/search/{searchString}")
-    ResponseEntity<List<Entity>> getEmployeesByNameSearch(@PathVariable String searchString);
+    @GetMapping(ApiConstants.REST_API_URI_GET_EMPLOYEES_BY_NAME)
+    ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString);
 
-    @GetMapping("/{id}")
-    ResponseEntity<Entity> getEmployeeById(@PathVariable String id);
+    @GetMapping(ApiConstants.REST_API_URI_EMPLOYEE_ID)
+    ResponseEntity<Employee> getEmployeeById(@PathVariable String id);
 
-    @GetMapping("/highestSalary")
+    @GetMapping(ApiConstants.REST_API_URI_GET_HIGHEST_SALARY)
     ResponseEntity<Integer> getHighestSalaryOfEmployees();
 
-    @GetMapping("/topTenHighestEarningEmployeeNames")
+    @GetMapping(ApiConstants.REST_API_URI_GET_TOP_TEN_EMPLOYEE_NAMES)
     ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames();
 
     @PostMapping()
-    ResponseEntity<Entity> createEmployee(@RequestBody Input employeeInput);
+    ResponseEntity<Object> createEmployee(@RequestBody Map<String, Object> employeeInput);
 
-    @DeleteMapping("/{id}")
-    ResponseEntity<String> deleteEmployeeById(@PathVariable String id);
+    @DeleteMapping(ApiConstants.REST_API_URI_EMPLOYEE_ID)
+    ResponseEntity<Object> deleteEmployeeById(@PathVariable String id);
 }
