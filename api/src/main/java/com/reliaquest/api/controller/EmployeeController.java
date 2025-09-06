@@ -57,6 +57,7 @@ public class EmployeeController implements IEmployeeController {
 		return new ResponseEntity<List<Employee>>(employeeListByName, HttpStatus.OK);
 	}
 
+	//http://localhost:8111/ed23ec1c-5647-4a3d-8599-632dba543d00
 	@Override
 	public ResponseEntity<Employee> getEmployeeById(String id) {
 		logger.info("EmployeeController|getEmployeeById|Entry");
@@ -74,6 +75,7 @@ public class EmployeeController implements IEmployeeController {
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 
+	//http://localhost:8111/highestSalary
 	@Override
 	public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
 		logger.info("EmployeeController|getHighestSalaryOfEmployees|Entry");
@@ -91,6 +93,7 @@ public class EmployeeController implements IEmployeeController {
 		return new ResponseEntity<Integer>(maxSalary, HttpStatus.OK);
 	}
 
+	//http://localhost:8111/topTenHighestEarningEmployeeNames
 	@Override
 	public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
 		logger.info("EmployeeController|getTopTenHighestEarningEmployeeNames|Entry");

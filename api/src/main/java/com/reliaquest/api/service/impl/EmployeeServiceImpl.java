@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.reliaquest.api.dtos.DeleteEmployeeByNameDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -102,12 +104,28 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public Object deleteEmployee(String id) {
 		logger.debug("EmployeeService|deleteEmployee|Entry");
 
-		Object employeeMono = webClient.delete().uri(ApiConstants.REST_API_URI_DELETE_EMPLOYEE + id)
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).retrieve().bodyToMono(Object.class)
+		// Step 1: Get employee by ID to fetch their name
+		Employee employee = getEmployeeById(id);
+
+		if (employee == null) {
+			logger.error("Employee not found with ID: " + id);
+			throw new RuntimeException("Employee not found with ID: " + id);
+		}
+
+		// Step 2: Create DeleteEmployeeByNameDTO with the employee name
+		DeleteEmployeeByNameDTO deleteInput = new DeleteEmployeeByNameDTO();
+		deleteInput.setName(employee.getEmployeeName());
+
+		// Step 3: Call delete API using method() since delete() doesn't support body
+		Object employeeMono = webClient.method(HttpMethod.DELETE)
+				.uri(ApiConstants.REST_API_URI_DELETE_EMPLOYEE)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.bodyValue(deleteInput) // Send DeleteEmployeeByNameDTO object
+				.retrieve()
+				.bodyToMono(Object.class)
 				.block();
 
 		logger.debug("EmployeeService|deleteEmployee|Exit");
-
 		return employeeMono;
 	}
 
