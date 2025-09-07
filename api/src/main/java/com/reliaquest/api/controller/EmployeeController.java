@@ -116,6 +116,11 @@ public class EmployeeController implements IEmployeeController {
 	public ResponseEntity<Object> createEmployee(Map employeeInput) {
 		logger.info("EmployeeController|createEmployee|Entry");
 
+		if (employeeInput == null || employeeInput.isEmpty() ) {
+			logger.error("EmployeeController|createEmployee|Invalid input");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid employee input");
+		}
+
 		Object response = null;
 		try {
 			response = employeeService.createEmployee(employeeInput);
@@ -136,8 +141,14 @@ public class EmployeeController implements IEmployeeController {
 		try {
 			response = employeeService.deleteEmployee(id);
 
-		} catch (Exception e) {
-			logger.error("EmployeeController|createEmployee|Error:{}", e.getMessage());
+		}
+		catch (ResponseStatusException e) {
+			// log at WARN for expected errors (like 404 or 400)
+			logger.error("EmployeeController|deleteEmployeeById|Handled error: {}", e.getReason());
+			throw e;
+		}
+		catch (Exception e) {
+			logger.error("EmployeeController|deleteEmployeeById|Unexpected error", e);
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 		logger.info("EmployeeController|deleteEmployeeById|Employee Deleted Successfully|Exit");
