@@ -285,9 +285,9 @@ class EmployeeControllerTest {
         Employee employee = new Employee();
         employee.setId("1");
         employee.setEmployeeName("John Doe");
-        employee.setEmployeeSalary("75000");
-        employee.setEmployeeAge("30");
-        employee.setProfileImage("profile.jpg");
+        employee.setEmployeeSalary(75000);
+        employee.setEmployeeAge(30);
+        employee.setEmployeeEmail("example@gmail.com");
         return employee;
     }
 
@@ -297,9 +297,9 @@ class EmployeeControllerTest {
         Employee emp2 = new Employee();
         emp2.setId("2");
         emp2.setEmployeeName("Jane Smith");
-        emp2.setEmployeeSalary("80000");
-        emp2.setEmployeeAge("28");
-        emp2.setProfileImage("profile2.jpg");
+        emp2.setEmployeeSalary(80000);
+        emp2.setEmployeeAge(28);
+        emp2.setEmployeeEmail("example@gmail.com");
 
         return Arrays.asList(emp1, emp2);
     }

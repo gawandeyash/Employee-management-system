@@ -65,6 +65,10 @@ public class EmployeeController implements IEmployeeController {
 		Employee employee = new Employee();
 		try {
 			employee = employeeService.getEmployeeById(id);
+			if (employee == null) {
+				logger.warn("EmployeeController|getEmployeeById|Employee not found for id: {}", id);
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found");
+			}
 		} catch (Exception e) {
 			logger.error("EmployeeController|getEmployeeById|Error:{}", e.getMessage());
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
@@ -121,6 +125,24 @@ public class EmployeeController implements IEmployeeController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid employee input");
 		}
 
+		String name = (String) employeeInput.get("name");
+		Integer salary = (Integer) employeeInput.get("salary");
+		Integer age = (Integer) employeeInput.get("age");
+		String title = (String) employeeInput.get("title");
+
+		if (name == null || name.isBlank()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name is mandatory");
+		}
+		if (salary == null || salary < 1) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Salary must be greater than 0");
+		}
+		if (age == null || age < 16 || age > 75) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Age must be between 16 and 75");
+		}
+		if (title == null || title.isBlank()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title is mandatory");
+		}
+
 		Object response = null;
 		try {
 			response = employeeService.createEmployee(employeeInput);
@@ -143,7 +165,6 @@ public class EmployeeController implements IEmployeeController {
 
 		}
 		catch (ResponseStatusException e) {
-			// log at WARN for expected errors (like 404 or 400)
 			logger.error("EmployeeController|deleteEmployeeById|Handled error: {}", e.getReason());
 			throw e;
 		}

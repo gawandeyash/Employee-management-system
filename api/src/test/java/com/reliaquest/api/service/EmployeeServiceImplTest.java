@@ -23,8 +23,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.*;
 
-import static com.reliaquest.api.util.TestDataUtil.createEmployeeInputMap;
-import static com.reliaquest.api.util.TestDataUtil.createMockEmployeeListWithMultipleEmployees;
+import static com.reliaquest.api.util.TestDataUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
@@ -320,27 +319,4 @@ class EmployeeServiceImplTest {
         verify(webClient, never()).method(HttpMethod.DELETE);
     }
 
-    // Helper methods
-    private Employee createMockEmployee() {
-        Employee employee = new Employee();
-        employee.setId("1");
-        employee.setEmployeeName("John Doe");
-        employee.setEmployeeSalary("75000");
-        employee.setEmployeeAge("30");
-        employee.setProfileImage("profile.jpg");
-        return employee;
-    }
-
-    private List<Employee> createMockEmployeeList() {
-        Employee emp1 = createMockEmployee();
-
-        Employee emp2 = new Employee();
-        emp2.setId("2");
-        emp2.setEmployeeName("Jane Smith");
-        emp2.setEmployeeSalary("80000");
-        emp2.setEmployeeAge("28");
-        emp2.setProfileImage("profile2.jpg");
-
-        return Arrays.asList(emp1, emp2);
-    }
 }

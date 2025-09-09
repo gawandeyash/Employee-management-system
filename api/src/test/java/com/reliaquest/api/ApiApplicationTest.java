@@ -174,4 +174,64 @@ class ApiApplicationTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    void createEmployee_MissingName_ReturnsBadRequest() throws Exception {
+        // Arrange
+        Map<String, Object> employeeInput = createEmployeeInputMap();
+        employeeInput.remove("name"); // Remove name to simulate invalid input
+
+        // Act & Assert
+        mockMvc.perform(post("/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(employeeInput)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("Name is mandatory"));
+    }
+
+    @Test
+    void createEmployee_AgeBelowMinimum_ReturnsBadRequest() throws Exception {
+        // Arrange
+        Map<String, Object> employeeInput = createEmployeeInputMap();
+        employeeInput.put("age", 15); // Invalid age
+
+        // Act & Assert
+        mockMvc.perform(post("/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(employeeInput)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("Age must be between 16 and 75"));
+    }
+
+    @Test
+    void createEmployee_SalaryBelowMinimum_ReturnsBadRequest() throws Exception {
+        // Arrange
+        Map<String, Object> employeeInput = createEmployeeInputMap();
+        employeeInput.put("salary", 0); // Invalid salary
+
+        // Act & Assert
+        mockMvc.perform(post("/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(employeeInput)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("Salary must be greater than 0"));
+    }
+
+    @Test
+    void createEmployee_MissingTitle_ReturnsBadRequest() throws Exception {
+        // Arrange
+        Map<String, Object> employeeInput = createEmployeeInputMap();
+        employeeInput.remove("title"); // Remove title
+
+        // Act & Assert
+        mockMvc.perform(post("/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(employeeInput)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("Title is mandatory"));
+    }
+
 }

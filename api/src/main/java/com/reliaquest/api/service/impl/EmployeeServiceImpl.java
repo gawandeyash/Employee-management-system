@@ -73,7 +73,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		List<Employee> employeeList = getAllEmployeeList();
 		logger.debug("EmployeeService|getHighestSalaryOfEmployee|Exit");
 
-		return employeeList.stream().map(emp -> emp.getEmployeeSalary()).mapToInt(Integer::parseInt).max().getAsInt();
+		//return employeeList.stream().map(emp -> emp.getEmployeeSalary()).mapToInt(Integer::parseInt).max().getAsInt();
+		return employeeList.stream()
+				.mapToInt(Employee::getEmployeeSalary)
+				.max()
+				.orElseThrow(() -> new RuntimeException("No employees found"));
 	}
 
 	@Override
