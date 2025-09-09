@@ -23,12 +23,17 @@ Below are the API's with endpoints and the sample input
 7. deleteEmployeeById - DELETE http://localhost:8111/{id}
 
 Here’s a brief overview of my approach:
--Followed Test-Driven Development (TDD): I wrote test cases first, ensured they failed, and then implemented the functionality to make them pass. This helped ensure correctness from the start.
--Focused on clean code and maintainability: Applied proper naming conventions, modular methods, and separation of concerns to make the code readable and easy to maintain.
--Designed the application for scalability: Structured the project layers (Controller, Service, Repository) to allow easy extension for future features.
--Implemented a well-organized architecture: Each module has a clear responsibility; validation, exception handling, and service logic are properly separated.
--Comprehensive unit and integration tests: Ensured high coverage for all critical functionalities.
--Adhered to the specifications mentioned in the README, including CRUD operations, input validations, and proper HTTP responses.
+1. Followed Test-Driven Development (TDD): I wrote test cases first, ensured they failed, and then implemented the functionality to make them pass. This helped ensure correctness from the start.
+
+2. Focused on clean code and maintainability: Applied proper naming conventions, modular methods, and separation of concerns to make the code readable and easy to maintain.
+
+3. Designed the application for scalability: Structured the project layers (Controller, Service, Repository) to allow easy extension for future features.
+
+4. Implemented a well-organized architecture: Each module has a clear responsibility; validation, exception handling, and service logic are properly separated.
+
+5. Comprehensive unit and integration tests: Ensured high coverage for all critical functionalities.
+
+6. Adhered to the specifications mentioned in the README, including CRUD operations, input validations, and proper HTTP responses.
 
 --------------------------------------------------------------------------------------------------------------------
 
