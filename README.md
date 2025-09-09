@@ -1,5 +1,37 @@
 # ReliaQuest Coding Challenge
 
+I have completed the Employee Management System assignment as per the requirements mentioned in this file.
+
+Steps to run the application:
+1. Run ApiApplication.java (localhost:8111)
+2. Run ServerApplication.java (localhost:8112)
+3. To run unit tests start ApiApplicationTest.java
+
+Below are the API's with endpoints and the sample input 
+1. getAllEmployees - http://localhost:8111/
+2. getEmployeesByNameSearch - http://localhost:8111/{name}
+3. getEmployeeById - GET http://localhost:8111/{id}
+4. getHighestSalaryOfEmployees - GET http://localhost:8111/highestSalary
+5. getTopTenHighestEarningEmployeeNames - GET http://localhost:8111/topTenHighestEarningEmployeeNames
+6. createEmployee - POST http://localhost:8111/
+   {
+		"name": "Yash",
+        "salary": 185000,
+        "age": 25,
+        "title": "Software Developer"
+	}
+7. deleteEmployeeById - DELETE http://localhost:8111/{id}
+
+Here’s a brief overview of my approach:
+-Followed Test-Driven Development (TDD): I wrote test cases first, ensured they failed, and then implemented the functionality to make them pass. This helped ensure correctness from the start.
+-Focused on clean code and maintainability: Applied proper naming conventions, modular methods, and separation of concerns to make the code readable and easy to maintain.
+-Designed the application for scalability: Structured the project layers (Controller, Service, Repository) to allow easy extension for future features.
+-Implemented a well-organized architecture: Each module has a clear responsibility; validation, exception handling, and service logic are properly separated.
+-Comprehensive unit and integration tests: Ensured high coverage for all critical functionalities.
+-Adhered to the specifications mentioned in the README, including CRUD operations, input validations, and proper HTTP responses.
+
+--------------------------------------------------------------------------------------------------------------------
+
 #### In this assessment you will be tasked with filling out the functionality of different methods that will be listed further down.
 
 These methods will require some level of API interactions with Mock Employee API at http://localhost:8112/api/v1/employee.
