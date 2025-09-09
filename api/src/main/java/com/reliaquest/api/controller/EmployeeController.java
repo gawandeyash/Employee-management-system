@@ -28,7 +28,7 @@ public class EmployeeController implements IEmployeeController {
 
 	@Override
 	public ResponseEntity<List<Employee>> getAllEmployees() throws IOException {
-		logger.info("EmployeeController|getAllEmployees|Entry");
+		logger.debug("EmployeeController|getAllEmployees|Entry");
 		List<Employee> employeeList = new ArrayList<>();
 		try {
 			employeeList = employeeService.getAllEmployeeList();
@@ -36,7 +36,7 @@ public class EmployeeController implements IEmployeeController {
 			logger.error("EmployeeController|getAllEmployees|Error:{}", e.getMessage());
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
-		logger.info("EmployeeController|getAllEmployees|Exit");
+		logger.debug("EmployeeController|getAllEmployees|Exit");
 
 		return new ResponseEntity<List<Employee>>(employeeList, HttpStatus.OK);
 	}
@@ -44,7 +44,7 @@ public class EmployeeController implements IEmployeeController {
 	@Override
 	public ResponseEntity<List<Employee>> getEmployeesByNameSearch(String searchString) {
 
-		logger.info("EmployeeController|getEmployeesByNameSearch|Entry");
+		logger.debug("EmployeeController|getEmployeesByNameSearch|Entry");
 		List<Employee> employeeListByName = new ArrayList<>();
 		try {
 			employeeListByName = employeeService.getEmployeeBySearchName(searchString);
@@ -52,7 +52,7 @@ public class EmployeeController implements IEmployeeController {
 			logger.error("EmployeeController|getEmployeesByNameSearch|Error:{}", e.getMessage());
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
-		logger.info("EmployeeController|getEmployeesByNameSearch|Exit");
+		logger.debug("EmployeeController|getEmployeesByNameSearch|Exit");
 
 		return new ResponseEntity<List<Employee>>(employeeListByName, HttpStatus.OK);
 	}
@@ -60,7 +60,7 @@ public class EmployeeController implements IEmployeeController {
 	//http://localhost:8111/ed23ec1c-5647-4a3d-8599-632dba543d00
 	@Override
 	public ResponseEntity<Employee> getEmployeeById(String id) {
-		logger.info("EmployeeController|getEmployeeById|Entry");
+		logger.debug("EmployeeController|getEmployeeById|Entry");
 
 		Employee employee = new Employee();
 		try {
@@ -74,7 +74,7 @@ public class EmployeeController implements IEmployeeController {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 
-		logger.info("EmployeeController|getEmployeeById|Exit");
+		logger.debug("EmployeeController|getEmployeeById|Exit");
 
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
@@ -82,7 +82,7 @@ public class EmployeeController implements IEmployeeController {
 	//http://localhost:8111/highestSalary
 	@Override
 	public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
-		logger.info("EmployeeController|getHighestSalaryOfEmployees|Entry");
+		logger.debug("EmployeeController|getHighestSalaryOfEmployees|Entry");
 
 		Integer maxSalary = null;
 		try {
@@ -92,7 +92,7 @@ public class EmployeeController implements IEmployeeController {
 			logger.error("EmployeeController|getHighestSalaryOfEmployees|Error:{}", e.getMessage());
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
-		logger.info("EmployeeController|getHighestSalaryOfEmployees|Exit");
+		logger.debug("EmployeeController|getHighestSalaryOfEmployees|Exit");
 
 		return new ResponseEntity<Integer>(maxSalary, HttpStatus.OK);
 	}
@@ -100,7 +100,7 @@ public class EmployeeController implements IEmployeeController {
 	//http://localhost:8111/topTenHighestEarningEmployeeNames
 	@Override
 	public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
-		logger.info("EmployeeController|getTopTenHighestEarningEmployeeNames|Entry");
+		logger.debug("EmployeeController|getTopTenHighestEarningEmployeeNames|Entry");
 
 		List<String> topTenHighestEarningEmpNamesList = new ArrayList<>();
 		try {
@@ -111,7 +111,7 @@ public class EmployeeController implements IEmployeeController {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 
-		logger.info("EmployeeController|getTopTenHighestEarningEmployeeNames|Exit");
+		logger.debug("EmployeeController|getTopTenHighestEarningEmployeeNames|Exit");
 
 		return new ResponseEntity<List<String>>(topTenHighestEarningEmpNamesList, HttpStatus.OK);
 	}
@@ -124,7 +124,7 @@ public class EmployeeController implements IEmployeeController {
 //	}
 	@Override
 	public ResponseEntity<Object> createEmployee(Map employeeInput) {
-		logger.info("EmployeeController|createEmployee|Entry");
+		logger.debug("EmployeeController|createEmployee|Entry");
 
 		if (employeeInput == null || employeeInput.isEmpty() ) {
 			logger.error("EmployeeController|createEmployee|Invalid input");
@@ -156,14 +156,14 @@ public class EmployeeController implements IEmployeeController {
 			logger.error("EmployeeController|createEmployee|Error:{}", e.getMessage());
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
-		logger.info("EmployeeController|createEmployee|Employee Created Successfully|Exit");
+		logger.debug("EmployeeController|createEmployee|Employee Created Successfully|Exit");
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<Object> deleteEmployeeById(String id) {
-		logger.info("EmployeeController|deleteEmployeeById|Entry");
+		logger.debug("EmployeeController|deleteEmployeeById|Entry");
 
 		Object response = null;
 		try {
@@ -178,7 +178,7 @@ public class EmployeeController implements IEmployeeController {
 			logger.error("EmployeeController|deleteEmployeeById|Unexpected error", e);
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
-		logger.info("EmployeeController|deleteEmployeeById|Employee Deleted Successfully|Exit");
+		logger.debug("EmployeeController|deleteEmployeeById|Employee Deleted Successfully|Exit");
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

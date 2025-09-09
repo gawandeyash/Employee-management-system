@@ -33,11 +33,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public List<Employee> getAllEmployeeList() {
-		logger.info("EmployeeService|getAllEmployeeList|Entry");
+		logger.debug("EmployeeService|getAllEmployeeList|Entry");
 		Mono<EmployeeListResponseDTO> employeeMono = webClient.get().uri(ApiConstants.REST_API_URI_GET_ALL_EMPLOYEES)
 				.retrieve().bodyToMono(EmployeeListResponseDTO.class);
 
-		logger.info("EmployeeService|getAllEmployeeList|Exit");
+		logger.debug("EmployeeService|getAllEmployeeList|Exit");
 		return employeeMono.block().getData();
 	}
 
@@ -93,13 +93,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public Object createEmployee(Map<String, Object> employeeInput) {
-		logger.info("EmployeeService|createEmployee|Entry");
+		logger.debug("EmployeeService|createEmployee|Entry");
 
 		Object employeeMono = webClient.post().uri(ApiConstants.REST_API_URI_CREATE_EMPLOYEE)
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.body(BodyInserters.fromValue(employeeInput)).retrieve().bodyToMono(Map.class).block();
 
-		logger.info("EmployeeService|createEmployee|Exit");
+		logger.debug("EmployeeService|createEmployee|Exit");
 
 		return employeeMono;
 	}
