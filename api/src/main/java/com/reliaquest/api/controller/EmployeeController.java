@@ -116,6 +116,12 @@ public class EmployeeController implements IEmployeeController {
 		return new ResponseEntity<List<String>>(topTenHighestEarningEmpNamesList, HttpStatus.OK);
 	}
 
+//	{
+//		"name": "Yash",
+//			"salary": 185000,
+//			"age": 25,
+//			"title": "Software Developer"
+//	}
 	@Override
 	public ResponseEntity<Object> createEmployee(Map employeeInput) {
 		logger.info("EmployeeController|createEmployee|Entry");
