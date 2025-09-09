@@ -1,7 +1,7 @@
 package com.reliaquest.api.constants;
 
 public class ApiConstants {
-
+	// created constants for the endpoints, in case any endpoint changes in future we just need to update the constant
 	public static final String REST_API_URI_GET_EMPLOYEES_BY_NAME ="/search/{searchString}";
 	public static final String REST_API_URI_EMPLOYEE_ID ="/{id}"; 
 	public static final String REST_API_URI_GET_HIGHEST_SALARY="/highestSalary";
