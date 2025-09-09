@@ -9,7 +9,7 @@ Steps to run the application:
 
 Below are the API's with endpoints and the sample input 
 1. getAllEmployees - http://localhost:8111/
-2. getEmployeesByNameSearch - http://localhost:8111/{name}
+2. getEmployeesByNameSearch - http://localhost:8111/search/{name}
 3. getEmployeeById - GET http://localhost:8111/{id}
 4. getHighestSalaryOfEmployees - GET http://localhost:8111/highestSalary
 5. getTopTenHighestEarningEmployeeNames - GET http://localhost:8111/topTenHighestEarningEmployeeNames
