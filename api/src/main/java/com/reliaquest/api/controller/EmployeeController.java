@@ -34,7 +34,7 @@ public class EmployeeController implements IEmployeeController {
 			employeeList = employeeService.getAllEmployeeList();
 		} catch (Exception e) {
 			logger.error("EmployeeController|getAllEmployees|Error:{}", e.getMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 		logger.debug("EmployeeController|getAllEmployees|Exit");
 
@@ -50,7 +50,7 @@ public class EmployeeController implements IEmployeeController {
 			employeeListByName = employeeService.getEmployeeBySearchName(searchString);
 		} catch (Exception e) {
 			logger.error("EmployeeController|getEmployeesByNameSearch|Error:{}", e.getMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 		logger.debug("EmployeeController|getEmployeesByNameSearch|Exit");
 
@@ -71,7 +71,7 @@ public class EmployeeController implements IEmployeeController {
 			}
 		} catch (Exception e) {
 			logger.error("EmployeeController|getEmployeeById|Error:{}", e.getMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 
 		logger.debug("EmployeeController|getEmployeeById|Exit");
@@ -90,7 +90,7 @@ public class EmployeeController implements IEmployeeController {
 
 		} catch (Exception e) {
 			logger.error("EmployeeController|getHighestSalaryOfEmployees|Error:{}", e.getMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 		logger.debug("EmployeeController|getHighestSalaryOfEmployees|Exit");
 
@@ -108,7 +108,7 @@ public class EmployeeController implements IEmployeeController {
 
 		} catch (Exception e) {
 			logger.error("EmployeeController|getTopTenHighestEarningEmployeeNames|Error:{}", e.getMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 
 		logger.debug("EmployeeController|getTopTenHighestEarningEmployeeNames|Exit");
@@ -154,7 +154,7 @@ public class EmployeeController implements IEmployeeController {
 			response = employeeService.createEmployee(employeeInput);
 		} catch (Exception e) {
 			logger.error("EmployeeController|createEmployee|Error:{}", e.getMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 		logger.debug("EmployeeController|createEmployee|Employee Created Successfully|Exit");
 
@@ -176,7 +176,7 @@ public class EmployeeController implements IEmployeeController {
 		}
 		catch (Exception e) {
 			logger.error("EmployeeController|deleteEmployeeById|Unexpected error", e);
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			throw e;
 		}
 		logger.debug("EmployeeController|deleteEmployeeById|Employee Deleted Successfully|Exit");
 

@@ -1,5 +1,6 @@
 package com.reliaquest.api.Exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,4 +18,16 @@ public class GlobalExceptionHandler {
         body.put("timestamp", new Date());
         return new ResponseEntity<>(body, ex.getStatusCode());
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put("error", ex.getClass());
+        body.put("message", ex.getMessage()); // exception message
+        body.put("timestamp", new Date());
+
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
